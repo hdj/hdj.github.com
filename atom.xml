@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://hdj.github.com/atom.xml" rel="self"/>
   <link href="http://hdj.github.com/"/>
-  <updated>2012-09-08T22:27:10+08:00</updated>
+  <updated>2012-09-08T22:37:37+08:00</updated>
   <id>http://hdj.github.com/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -287,7 +287,8 @@ export PATH=/usr/local/homebrew/bin:$PATH
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p></p>
+<p>
+此外，Octopress支援的語言可以參考<a href="http://pygments.org/languages/">Pygments的網站</a>。</p>
 
 <h3>插入圖片</h3>
 
