@@ -338,7 +338,8 @@ rake deploy
 <pre><code>rake new_post["how-to-install-octopress"] 
 </code></pre>
 
-<p>另外一個應該就是將文章發佈github的指令，之前已經提過了：</p>
+<p>這個指令會在<code>source/_posts</code>底下，產生一個markdown的文件，我們可以直接編輯該檔案，
+修改完之後，就再用以下指令將文章轉為html，並且發佈到github上：</p>
 
 <pre><code>rake generate
 rake deploy
