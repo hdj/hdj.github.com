@@ -4,7 +4,7 @@
   <title><![CDATA[My Octopress Blog]]></title>
   <link href="http://hdj.github.com/atom.xml" rel="self"/>
   <link href="http://hdj.github.com/"/>
-  <updated>2012-09-08T14:33:56+08:00</updated>
+  <updated>2012-09-08T22:27:10+08:00</updated>
   <id>http://hdj.github.com/</id>
   <author>
     <name><![CDATA[Your Name]]></name>
@@ -12,6 +12,309 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mountain Lion下安裝Octopress+Github]]></title>
+    <link href="http://hdj.github.com/blog/2012/09/08/mountain-lionxia-an-zhuang-octopress-plus-github/"/>
+    <updated>2012-09-08T14:45:00+08:00</updated>
+    <id>http://hdj.github.com/blog/2012/09/08/mountain-lionxia-an-zhuang-octopress-plus-github</id>
+    <content type="html"><![CDATA[<p>相信有在撰寫Blog的Programmer一定對Octopress不陌生吧，
+沒錯Octopress可以說是專為Progreammer設計的Blog軟體。
+正因為已經有多位知名的Programmer部落客開始使用Octopress來記錄自己的程式心得，
+讓小弟好奇心大增，想知道Octopress到底有什麼通天的本領，
+能讓眾多部落客願意捨棄Wordpress或是其他知名的Blog的軟體。</p>
+
+<p>安裝好了之後，發現Octopress真的很適合拿來記錄code片段，markdown的語法也很容易上手，
+寫文章的時候相當流暢，還可以用自己熟悉的編輯軟體，像我就用vim或是textmate來撰寫這篇文章，
+可以專注於文字的編寫，不用去想html的編碼為何，真的是很適合hacker的Blog軟體。
+Octopress的優點太多了，大家可以參考<a href="http://blog.xdite.net/posts/2011/10/07/what-is-octopress/">XDite的文章</a>，
+這裡，我就不一一說明他的優點啦。</p>
+
+<p>既然，Octopress可說是專為programmer設計的軟體，所以安裝上也是有一一門檻，並不是這麼的直覺。
+原則上，Octopress的概念是用ruby將Markdown的原始檔轉成html，然後在上傳到遠端的網路空間。
+由此可見，一般沒有程式背景的朋友，想用Octopress寫部落格，可能比較不容易上手，光看到要下載原始檔下來，可能就已經跑走了。
+而且在安裝Octopress的過程中，需要不少的資工背景，我自己也花了半天才安裝起來。
+底下我將個人的安裝心得寫下來當做Octopress的第一篇技術文章。
+(好像大部份的Octopress使用者，第一篇都是寫安裝教學，看來要安裝Octopress真的有一點點難度)
+基本的安裝說明可以參考<a href="http://octopress.org/help/">Octopress官方網站</a>。</p>
+
+<p>簡單的來說，安裝的步驟有3：</p>
+
+<ol>
+<li><a href="#ruby">安裝Ruby 1.9.3</a></li>
+<li><a href="#octopress">安裝Octopress</a></li>
+<li><a href="#github">Deploy至Github</a></li>
+</ol>
+
+
+<p>底下將詳細的安裝流程記下供大家參考。</p>
+
+<h1 id="ruby">Step 1 安裝Ruby 1.9.3</h1>
+
+
+<p>首先，我們需先安裝Ruby1.9.3，因為Octopress的官方有強調必須使用ruby 1.9.3才能將Octopress安裝起來，
+而Mountain lion內建的ruby只有到1.8.7，所以需要升級到1.9.3才能安裝最新版的Octopress。
+想安裝新版本的ruby，就必須安裝以下套件，我將會在之後的小節中一一說明。</p>
+
+<ul>
+<li>Xcode 4.4</li>
+<li>command line utilities</li>
+<li>homebrew</li>
+<li>使用brew安裝libksba</li>
+<li>rvm</li>
+</ul>
+
+
+<h2>安裝Xcode 4.4</h2>
+
+<p>安裝Xcode很簡單，只要上app store，找尋Xcode，然後下載，
+因為檔案有1.5G左右，所以可能要等一下，app store的畫面如下：
+<img src="http://hdj.github.com/images/2012_09_08_xcode_installed.png" alt="xcode4.4" /></p>
+
+<h2>安裝command line utilities</h2>
+
+<p>接著，因為安裝ruby時會使用到make等command line工具，這也是安裝Xcode的主因之一，不過Xcode 4.4並沒有內建command line 工具，
+需要自行點選安裝，所以，請開啟Xcode的Preference，找到Downloads，然後點選安裝command line tools，如下圖所示：</p>
+
+<p><img src="http://hdj.github.com/images/2012_09_08_xcode_command_line_tools.jpg" alt="xcode command line tools" /></p>
+
+<h2>安裝homebrew</h2>
+
+<p>基本上，安裝完rvm就可以直接升級ruby 1.9.3，但是在Mountain lion上，rvm在安裝ruby 1.9.3的時候會遇到一些問題，
+所以，必須額外再透過brew安裝libksba這個libary。
+要安裝homebrew，首先先切換到<code>/usr/local</code>資料：</p>
+
+<pre><code>cd /usr/local
+</code></pre>
+
+<p>然後輸入以下指令下載並安裝homebrew：</p>
+
+<pre><code>mkdir homebrew &amp;&amp; curl -L https://github.com/mxcl/homebrew/tarball/master | tar xz --strip 1 -C homebrew
+</code></pre>
+
+<p>安裝完homebrew之後，記得要設定路徑，請在<code>~/.bashrc</code>中加入：</p>
+
+<figure class='code'><figcaption><span>~/.bashrc  </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/homebrew/bin:<span class="nv">$PATH</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>確認<code>brew</code>指令可以使用之後，用以下指令安裝libksba：</p>
+
+<pre><code> brew install libksba
+</code></pre>
+
+<p>參考資料：</p>
+
+<ul>
+<li><a href="https://github.com/mxcl/homebrew/wiki/installation">https://github.com/mxcl/homebrew/wiki/installation</a></li>
+<li><a href="http://crosstown.coolestguyplanettech.com/os-x/40-setting-up-os-x-lion-to-plug-into-homebrew-package-manager">Installing Homebrew on OS X Mountain Lion 10.8 as Package Manager Install Unix Tools</a></li>
+</ul>
+
+
+<h2>安裝rvm</h2>
+
+<p>好啦，前置工具都安裝好了之後，我們來安裝rvm，透過rvm來更新ruby的版本，請在終端機底下輸入以下指令安裝：</p>
+
+<pre><code>curl -L https://get.rvm.io | bash -s stable --ruby
+</code></pre>
+
+<p>原則上，上面這個指令，會將rvm安裝在<code>~/.rvm/</code>資料夾中，所以，我們必須設定rvm的路徑，請在<code>~/.bashrc</code>中加入：</p>
+
+<figure class='code'><figcaption><span>~/.bashrc</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="o">[[</span> -s <span class="s2">&quot;$HOME/.rvm/scripts/rvm&quot;</span> <span class="o">]]</span> <span class="o">&amp;&amp;</span> . <span class="s2">&quot;$HOME/.rvm/scripts/rvm&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>如此一來，<code>rvm</code>這個指令就能運作正常了。
+接著，我們可以使用<code>rvm</code>來安裝ruby，原則上，在安裝rvm的過程中，它會自動幫你安裝最新版的ruby，
+如果沒有的話，請輸入以下指令安裝ruby 1.9.3：</p>
+
+<pre><code>rvm install 1.9.3
+</code></pre>
+
+<p>接著，切換ruby的版本：</p>
+
+<pre><code>rvm use 1.9.3
+</code></pre>
+
+<p>基本上，安裝完新的ruby，可以使用以下指令查看ruby的版本</p>
+
+<pre><code>ruby -v
+</code></pre>
+
+<p>不過，<code>rvm use 1.9.3</code>只是暫時將ruby轉成1.9.3，重新開啟終端機，就會變回原本的1.8.7，如果要完全切換成1.9.3，
+需要將1.9.3設成default的版本，請下這個指令：</p>
+
+<pre><code>rvm --default use  1.9.3
+</code></pre>
+
+<p>以上就是ruby 1.9.3的安裝步驟。</p>
+
+<p>參考資料：</p>
+
+<ul>
+<li><a href="http://net.tutsplus.com/tutorials/ruby/how-to-install-ruby-on-a-mac/">http://net.tutsplus.com/tutorials/ruby/how-to-install-ruby-on-a-mac/</a></li>
+<li><a href="http://stackoverflow.com/questions/8663936/how-do-i-change-my-ruby-version-using-rvm">http://stackoverflow.com/questions/8663936/how-do-i-change-my-ruby-version-using-rvm</a></li>
+<li><a href="https://github.com/wayneeseguin/rvm/issues/1054">https://github.com/wayneeseguin/rvm/issues/1054</a></li>
+</ul>
+
+
+<h1 id="octoress">Step 2 安裝Octopress</h1>
+
+
+<p>講了這麼一大串內容，終於來到我們的重頭戲－－安裝Octopress。
+二話不說，直接用git下載Octopress到我的家目錄：</p>
+
+<pre><code>cd ~/
+git clone git://github.com/imathis/octopress.git octopress
+</code></pre>
+
+<p>如果你沒有git的話，請到<a href="http://code.google.com/p/git-osx-installer/">Git for OS X Installer</a>下載。</p>
+
+<p>第一次登入Octopress資料夾的畫面如下：
+<img src="http://hdj.github.com/images/2012_09_08_octopress_shell.png" title="第一次進入Octopress資料夾" alt="Octopress-in-shelll" /></p>
+
+<p>然後輸入以下指令安裝Octopress</p>
+
+<pre><code>cd ~/octopress
+gem install bundler
+
+bundle install
+rake install
+</code></pre>
+
+<p>安裝完成之後，在octopress的資料夾中會多了好多檔案，這些多出來的檔案就是Octopress將Markdown轉成html的利器啦。</p>
+
+<p>灌到這一步驟，想知道自己的Octopress長的什麼樣子嗎？
+請切換到octopress的目錄，並用<code>preview</code>預覽：</p>
+
+<pre><code>cd ~/octopress
+rake preview
+</code></pre>
+
+<p>輸入完<code>rake preview</code>之後，你可以開啟web瀏覽器，並輸入<a href="http://127.0.0.1:4000">http://127.0.0.1:4000</a>，看看你新裝好的Octopress長什麼樣子，
+剛灌好的Octopress應該都是長這樣吧：</p>
+
+<p><img src="http://hdj.github.com/images/2012_09_08_octopress_init_snapshot.png" alt="2012_09_08_octopress_init_snapshot" /></p>
+
+<p>參考資料：</p>
+
+<ul>
+<li><a href="http://octopress.org/docs/setup/">Octopress Setup</a></li>
+<li><a href="http://swind.github.com/blog/2011/10/19/ban-jia-hou-di-1pian/">http://swind.github.com/blog/2011/10/19/ban-jia-hou-di-1pian/</a></li>
+<li><a href="http://lyhdev.com/note:octopress">http://lyhdev.com/note:octopress</a></li>
+<li><a href="http://blog.whsienc.net/blog/2012/03/03/how-to-install-octopress-on-mac-lion">http://blog.whsienc.net/blog/2012/03/03/how-to-install-octopress-on-mac-lion</a></li>
+<li><a href="http://coding.memory-forest.com/octopress-%E8%A9%A6%E6%9E%B6%E6%96%B9%E6%B3%95.html">http://coding.memory-forest.com/octopress-%E8%A9%A6%E6%9E%B6%E6%96%B9%E6%B3%95.html</a></li>
+<li><a href="http://dale-ma.heroku.com/blog/2012/03/25/first-trial-on-octopress">http://dale-ma.heroku.com/blog/2012/03/25/first-trial-on-octopress</a></li>
+<li><a href="http://happy-octopress.heroku.com/blog/2011/10/11/how-to-install-octopress/">http://happy-octopress.heroku.com/blog/2011/10/11/how-to-install-octopress/</a></li>
+</ul>
+
+
+<h1 id="github">Step 3 Deploy Octopress 到Github</h1>
+
+
+<p>完成<a href="#octopress">Step 2</a>之後，我們可以看到Octopress的雛型，但光只有自己能看到，相信無法滿足各位Hacker的需求，
+所以，我們要找一個免費的host，來呈現我們的Blog。
+還好，Github就是其中一個免費平台，可以將我們的Octopress產生的html存放在github.com之下，而且還可以使用免費的Domain name。</p>
+
+<p>首先到<a href="https://github.com/">https://github.com/</a>申請一個帳號，並且建立一個<code>username.github.com</code>的倉儲，
+例如，帳號是hdj，就建立一個<code>hdj.github.com</code>，
+這裡要注意，倉儲的全名是<code>hdj.github.com</code>，我第一次沒有看仔細，只建了一個<code>hdj</code>的倉儲，
+搞了半天才知道，原來後面要加github.com，github才會給你相對應的domain name。</p>
+
+<h2>Deploy 你的Octopress</h2>
+
+<p>github申請好之後，我們要將本地端的Octopress發佈到剛申請好的github空間，
+在終端機下，輸入以下指令連結github：</p>
+
+<pre><code>rake setup_github_pages
+</code></pre>
+
+<p>該指令會要你輸入欲連結的倉儲：</p>
+
+<pre><code>git@github.com:yourname/yourname.github.com.git
+</code></pre>
+
+<p>請將username 改成你的帳號</p>
+
+<p>接著，我們可以產生頁面，並且上傳網頁：</p>
+
+<pre><code>rake generate
+rake deploy
+</code></pre>
+
+<p>最後，你可以瀏覽<a href="http://yourname.github.com/">http://yourname.github.com/</a>，可以看到你的Octopress頁面，已經在github的平台上啦～～</p>
+
+<p>參考資料：</p>
+
+<p><a href="http://octopress.org/docs/deploying/github/">http://octopress.org/docs/deploying/github/</a></p>
+
+<h1>開始用Octopress撰寫Blog</h1>
+
+<p>基本上，Markdown的語法可以滿足大部份需求，像是程式碼片段，插入圖片，文章引用等功能，
+上手也很容易，相信身為programmer的各位一定能快速上手。以下筆記一些個人常用的指令和語法給大家參考：</p>
+
+<h2>常用指令</h2>
+
+<p>建立新文章的指令：</p>
+
+<pre><code>rake new_post["how-to-install-octopress"] 
+</code></pre>
+
+<p>另外一個應該就是將文章發佈github的指令，之前已經提過了：</p>
+
+<pre><code>rake generate
+rake deploy
+</code></pre>
+
+<h2>常用語法</h2>
+
+<h3>程式碼區塊語法</h3>
+
+<p>Markdown：</p>
+
+<pre><code>``` sh ~/.bashrc
+export PATH=/usr/local/homebrew/bin:$PATH
+``` 
+</code></pre>
+
+<p>Output：</p>
+
+<figure class='code'><figcaption><span>~/.bashrc</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>/usr/local/homebrew/bin:<span class="nv">$PATH</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p></p>
+
+<h3>插入圖片</h3>
+
+<p>基本語法：</p>
+
+<pre><code>![說明文字](/path/image.jpg)
+</code></pre>
+
+<p>假設要加入一張pic1.jpg，那他的語法如下：</p>
+
+<pre><code>![這是pic1](/images/pic1.jpg)
+</code></pre>
+
+<p>並且將pic1.jpg存放在<code>source/images/</code>底下，這樣圖片才能顯示出來。</p>
+
+<p>關於Markdown的語法可以參考以下網頁:</p>
+
+<ul>
+<li><a href="http://octopress.org/docs/blogging/">Blogging Basics</a></li>
+<li><a href="http://daringfireball.net/projects/markdown/basics">Markdown 基本語法(英文原文)</a></li>
+<li><a href="http://octopress.org/docs/blogging/code/">程式碼區塊的語法</a></li>
+<li><a href="http://markdown.tw/">Markdown 基本語法(中文翻譯)</a></li>
+<li><a href="http://mouapp.com/">Mouapp</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[不免俗的第一篇Octopress文章]]></title>
