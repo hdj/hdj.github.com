@@ -4,7 +4,7 @@
   <title><![CDATA[hdj的技術手札]]></title>
   <link href="http://hdj.github.com/atom.xml" rel="self"/>
   <link href="http://hdj.github.com/"/>
-  <updated>2012-09-08T23:16:07+08:00</updated>
+  <updated>2012-09-14T19:24:01+08:00</updated>
   <id>http://hdj.github.com/</id>
   <author>
     <name><![CDATA[hdj]]></name>
@@ -12,6 +12,18 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress 變更Themes]]></title>
+    <link href="http://hdj.github.com/blog/2012/09/10/octopress-bian-geng-themes/"/>
+    <updated>2012-09-10T00:14:00+08:00</updated>
+    <id>http://hdj.github.com/blog/2012/09/10/octopress-bian-geng-themes</id>
+    <content type="html"><![CDATA[<p>如何變更Themes
+<a href="http://pro.ctlok.com/blog/2012/03/25/blogger-migrate-to-octopress-github-page.html">http://pro.ctlok.com/blog/2012/03/25/blogger-migrate-to-octopress-github-page.html</a></p>
+
+<p><a href="https://github.com/imathis/octopress/wiki/List-Of-Octopress-Themes">List of Octopress Themes</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mountain Lion下安裝Octopress+Github]]></title>
